@@ -3,11 +3,9 @@ import os
 import json
 import webbrowser
 
-# Настройка темы и стиля
-ctk.set_appearance_mode("System")  # "Light" или "Dark"
+ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
 
-# Путь для сохранения данных веса
 WEIGHT_FILE = "weight_data.json"
 
 def load_weight_data():
@@ -23,7 +21,7 @@ def save_weight_data(data):
 def calculate_bmi():
     try:
         weight = float(weight_entry.get())
-        height = float(height_entry.get()) / 100  # Convert height to meters
+        height = float(height_entry.get()) / 100
         bmi = weight / (height ** 2)
         result = ""
         if bmi < 18.5:
@@ -74,17 +72,14 @@ def calculate_kbju():
 def open_github(event):
     webbrowser.open_new("https://github.com/anxiehub")
 
-# Создание основного окна
 root = ctk.CTk()
 root.title("Калькулятор ИМТ и КБЖУ")
 root.geometry("360x640")
 root.resizable(False, False)
 
-# Создание вкладок
 tab_view = ctk.CTkTabview(root)
 tab_view.pack(expand=True, fill="both")
 
-# Вкладка для ИМТ
 bmi_tab = tab_view.add("Калькулятор ИМТ")
 ctk.CTkLabel(bmi_tab, text="Калькулятор ИМТ", font=ctk.CTkFont(size=16, weight="bold")).pack(pady=10)
 
@@ -107,7 +102,6 @@ height_entry.pack(pady=5)
 bmi_button = ctk.CTkButton(frame_bmi, text="Рассчитать ИМТ", command=calculate_bmi, width=200, height=40, font=ctk.CTkFont(size=14))
 bmi_button.pack(pady=10)
 
-# Вкладка для КБЖУ
 kbju_tab = tab_view.add("Калькулятор КБЖУ")
 ctk.CTkLabel(kbju_tab, text="Калькулятор КБЖУ", font=ctk.CTkFont(size=16, weight="bold")).pack(pady=10)
 
@@ -147,10 +141,8 @@ activity_menu.pack(pady=5)
 kbju_button = ctk.CTkButton(frame_kbju, text="Рассчитать КБЖУ", command=calculate_kbju, width=200, height=40, font=ctk.CTkFont(size=14))
 kbju_button.pack(pady=10)
 
-# Подпись внизу окна
-footer_label = ctk.CTkLabel(root, text="open code on github", font=ctk.CTkFont(size=10), fg_color="gray")
+footer_label = ctk.CTkLabel(root, text="open code on github", font=ctk.CTkFont(size=10))
 footer_label.pack(side="bottom", pady=10)
 footer_label.bind("<Button-1>", open_github)
 
-# Запуск приложения
 root.mainloop()
